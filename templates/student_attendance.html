@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>My Attendance</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        .profile {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 14px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #222;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>Student Attendance</h2>
+
+    <div>
+        <a href="/student_dashboard">Dashboard</a>
+        <a href="/my_attendance">My Attendance</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <h1>My Attendance</h1>
+
+    {% if student %}
+
+        <div class="profile">
+
+            <p>
+                <b>Name:</b>
+                {{ student.name }}
+            </p>
+
+            <p>
+                <b>Roll Number:</b>
+                {{ student.roll_number }}
+            </p>
+
+            <p>
+                <b>Department:</b>
+                {{ student.department }}
+            </p>
+
+        </div>
+
+        <table>
+
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+
+            {% for record in records %}
+
+            <tr>
+
+                <td>{{ record.date }}</td>
+
+                <td>{{ record.status }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+
+        <p>
+            Attendance profile not found.
+        </p>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

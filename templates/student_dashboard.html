@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Student Dashboard</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        .profile {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 500px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .cards {
+            display: flex;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            width: 220px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .card p {
+            font-size: 35px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>Student Attendance</h2>
+
+    <div>
+        <a href="/student_dashboard">Dashboard</a>
+        <a href="/my_attendance">My Attendance</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <h1>Student Dashboard</h1>
+
+    {% if student %}
+
+        <div class="profile">
+
+            <h2>{{ student.name }}</h2>
+
+            <p>
+                <b>Roll Number:</b>
+                {{ student.roll_number }}
+            </p>
+
+            <p>
+                <b>Department:</b>
+                {{ student.department }}
+            </p>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Present</h3>
+                <p>{{ present }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Absent</h3>
+                <p>{{ absent }}</p>
+            </div>
+
+        </div>
+
+        <a class="button" href="/my_attendance">
+            View My Attendance
+        </a>
+
+    {% else %}
+
+        <p>Student profile not found.</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

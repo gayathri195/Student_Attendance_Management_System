@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Students</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 92%;
+            margin: 40px auto;
+        }
+
+        .add {
+            display: inline-block;
+            padding: 12px 18px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 25px;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 14px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #222;
+            color: white;
+        }
+
+        .edit {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .delete {
+            background: red;
+            color: white;
+            border: none;
+            padding: 7px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .message {
+            padding: 10px;
+            background: #e5ffe5;
+            color: green;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>Attendance Management</h2>
+
+    <div>
+        <a href="/admin_dashboard">Dashboard</a>
+        <a href="/students">Students</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <h1>Student Management</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <a class="add" href="/add_student">
+        + Add Student
+    </a>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Department</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for student in students %}
+
+        <tr>
+
+            <td>{{ student.id }}</td>
+
+            <td>{{ student.name }}</td>
+
+            <td>{{ student.roll_number }}</td>
+
+            <td>{{ student.department }}</td>
+
+            <td>{{ student.username }}</td>
+
+            <td>
+
+                <a class="edit"
+                   href="/edit_student/{{ student.id }}">
+                    Edit
+                </a>
+
+                <form
+                    method="POST"
+                    action="/delete_student/{{ student.id }}"
+                    style="display:inline;"
+                    onsubmit="return confirm('Delete this student?');"
+                >
+
+                    <button class="delete" type="submit">
+                        Delete
+                    </button>
+
+                </form>
+
+            </td>student_attendance.html
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

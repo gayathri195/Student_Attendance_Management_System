@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Edit Student</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .form-box {
+            width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>Attendance Management</h2>
+
+    <div>
+        <a href="/admin_dashboard">Dashboard</a>
+        <a href="/students">Students</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</nav>
+
+<div class="form-box">
+
+    <h1>Edit Student</h1>
+
+    <form method="POST">
+        <label for="name">Student Name:</label>
+        <input
+            type="text"
+            name="name"
+            value="{{ student.name }}"
+            required
+        >
+        <label for="roll_number">Roll Number:</label>
+        <input
+            type="text"
+            name="roll_number"
+            value="{{ student.roll_number }}"
+            required
+        >
+        <label for="department">Department:</label>
+        <input
+            type="text"
+            name="department"
+            value="{{ student.department }}"
+            required
+        >
+        <label for="username">Username:</label>
+        <input
+            type="text"
+            name="username"
+            value="{{ student.username }}"
+            required
+        >
+        <label for="password">Password:</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="New Password (optional)"
+        >
+
+        <button type="submit">
+            Update Student
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

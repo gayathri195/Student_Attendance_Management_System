@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Login - Student Attendance</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .login-box {
+            width: 400px;
+            margin: 100px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #5568d9;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .message {
+            background: #ffe5e5;
+            padding: 10px;
+            color: red;
+            border-radius: 5px;
+        }
+
+        .admin {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>Student Attendance</h1>
+
+    <h2>Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="username">Username:</label>
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter your username"
+            required
+        >
+        <label for="password">Password:</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <p>
+        New Student?
+        <a href="/register">Create Account</a>
+    </p>
+
+    <div class="admin">
+        <b>Admin Login</b><br>
+        Username: admin<br>
+        Password: admin123
+    </div>
+
+</div>
+
+</body>
+</html>

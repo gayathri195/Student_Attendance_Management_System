@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Attendance Management</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 92%;
+            margin: 40px auto;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #222;
+            color: white;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete {
+            background: red;
+        }
+
+        .message {
+            padding: 10px;
+            background: #e5ffe5;
+            color: green;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>Attendance Management</h2>
+
+    <div>
+        <a href="/admin_dashboard">Dashboard</a>
+        <a href="/students">Students</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <h1>Mark Attendance</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+
+        <label>
+            <b>Select Date:</b>
+        </label>
+
+        <br>
+
+        <input
+            type="date"
+            name="date"
+            required
+        >
+
+        <table>
+
+            <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Attendance</th>
+            </tr>
+
+            {% for student in students %}
+
+            <tr>
+
+                <td>{{ student.roll_number }}</td>
+
+                <td>{{ student.name }}</td>
+
+                <td>{{ student.department }}</td>
+
+                <td>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="status_{{ student.id }}"
+                            value="Present"
+                            required
+                        >
+                        Present
+                    </label>
+
+                    &nbsp;
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="status_{{ student.id }}"
+                            value="Absent"
+                        >
+                        Absent
+                    </label>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <button type="submit">
+            Save Attendance
+        </button>
+
+    </form>
+
+
+    <h1 style="margin-top:50px;">
+        Attendance Records
+    </h1>
+
+    <table>
+
+        <tr>
+            <th>Date</th>
+            <th>Roll Number</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for record in records %}
+
+        <tr>
+
+            <td>{{ record.date }}</td>
+
+            <td>{{ record.roll_number }}</td>
+
+            <td>{{ record.name }}</td>
+
+            <td>{{ record.status }}</td>
+
+            <td>
+
+                <form
+                    method="POST"
+                    action="/delete_attendance/{{ record.id }}"
+                    onsubmit="return confirm('Delete this attendance record?');"
+                >
+
+                    <button class="delete" type="submit">
+                        Delete
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>
